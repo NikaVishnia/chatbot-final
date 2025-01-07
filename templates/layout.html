@@ -10,6 +10,14 @@
     <title>Chatbot</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            height: 55px;
+        }
+
         .chat-history {
             text-align: left;
             width: 100%;
@@ -36,12 +44,26 @@
             border-radius: 5px;
             padding: 5px;
             margin-bottom: 8px;
-            }
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 55px);
+        }
+
+        .main {
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
 
         #footer {
-            position: fixed;
-            bottom: 3%;
-            width: 95%;
+            flex-shrink: 1;
+            width: 100%;
+            padding-block: 15px;
         }
 </style>
 
