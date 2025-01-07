@@ -116,3 +116,19 @@ async def chat(request: Request, user_input: Annotated[str, Form()]):
     chat_log.append({'role': 'assistant', 'content': bot_response})
     chat_responses.append(bot_response)
     return templates.TemplateResponse("home.html", {"request": request, "chat_responses": chat_responses})
+
+
+@app.get("/image", response_class=HTMLResponse)
+async def image_page(request: Request):
+    return templates.TemplateResponse("image.html", {"request": request})
+
+@app.post("/image", response_class=HTMLResponse)
+async def create_image(request: Request, user_input: Annotated[str, Form()]):
+    response = openai.images.generate(
+        prompt=user_input,
+        n=1,
+        size="256x256"
+    )
+
+    image_url = response.data[0].url
+    return templates.TemplateResponse("image.html", {"request": request, "image_url": image_url})
